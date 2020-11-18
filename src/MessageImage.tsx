@@ -36,6 +36,7 @@ export interface MessageImageProps<TMessage extends IMessage> {
   imageStyle?: StyleProp<ImageStyle>
   imageProps?: Partial<ImageProps>
   lightboxProps?: object
+  ImageComponent?: any
 }
 
 export default class MessageImage<
@@ -65,6 +66,7 @@ export default class MessageImage<
       imageProps,
       imageStyle,
       currentMessage,
+      ImageComponent,
     } = this.props
     if (!!currentMessage) {
       return (
@@ -75,11 +77,19 @@ export default class MessageImage<
             }}
             {...lightboxProps}
           >
-            <Image
-              {...imageProps}
-              style={[styles.image, imageStyle]}
-              source={{ uri: currentMessage.image }}
-            />
+            {ImageComponent ? (
+              <ImageComponent
+                {...imageProps}
+                style={[styles.image, imageStyle]}
+                source={{ uri: currentMessage.image }}
+              />
+            ) : (
+              <Image
+                {...imageProps}
+                style={[styles.image, imageStyle]}
+                source={{ uri: currentMessage.image }}
+              />
+            )}
           </Lightbox>
         </View>
       )

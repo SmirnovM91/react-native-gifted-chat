@@ -8,6 +8,7 @@ export interface MessageImageProps<TMessage extends IMessage> {
     imageStyle?: StyleProp<ImageStyle>;
     imageProps?: Partial<ImageProps>;
     lightboxProps?: object;
+    ImageComponent?: any;
 }
 export default class MessageImage<TMessage extends IMessage = IMessage> extends Component<MessageImageProps<TMessage>> {
     static defaultProps: {
