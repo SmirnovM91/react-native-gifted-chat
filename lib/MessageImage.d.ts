@@ -27,5 +27,10 @@ export default class MessageImage<TMessage extends IMessage = IMessage> extends 
         imageProps: PropTypes.Requireable<object>;
         lightboxProps: PropTypes.Requireable<object>;
     };
+    state: {
+        resizeMode: string;
+    };
+    didOpen: () => void;
+    onClose: () => void;
     render(): JSX.Element | null;
 }

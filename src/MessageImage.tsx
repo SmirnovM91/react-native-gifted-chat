@@ -59,6 +59,19 @@ export default class MessageImage<
     imageProps: PropTypes.object,
     lightboxProps: PropTypes.object,
   }
+
+  state = {
+    resizeMode: 'cover',
+  }
+
+  didOpen = () => {
+    this.setState({ resizeMode: 'contain' })
+  }
+
+  onClose = () => {
+    this.setState({ resizeMode: 'cover' })
+  }
+
   render() {
     const {
       containerStyle,
@@ -72,6 +85,8 @@ export default class MessageImage<
       return (
         <View style={[styles.container, containerStyle]}>
           <Lightbox
+            didOpen={this.didOpen}
+            onClose={this.onClose}
             activeProps={{
               style: styles.imageActive,
             }}
@@ -82,6 +97,7 @@ export default class MessageImage<
                 {...imageProps}
                 style={[styles.image, imageStyle]}
                 source={{ uri: currentMessage.image }}
+                resizeMode={this.state.resizeMode}
               />
             ) : (
               <Image
